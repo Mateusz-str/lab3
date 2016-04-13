@@ -1,5 +1,9 @@
 #include "Slav.h"
 #include <fstream>
+#include <stdlib.h>
+#include <sstream> 
+#include <iterator>   
+#include <algorithm> 
 
 using namespace std;
 
@@ -18,7 +22,7 @@ void Slav::init()
 
 Slav::Slav()
 {
-	static int amountOfNames = (init(), names.size());
+	static int amountOfNames = (init(), names.size()); //Lazy evaliuation instrukcja wykona tylko raz, obydwie instrukcje wykonaj sie i zmienn przyjmie wartosc ostatniej instrukcj po przecinku
 	_name = names[rand() % amountOfNames];
 	_id = _counter++;
 }
@@ -27,3 +31,11 @@ string Slav::description()
 {
 	return string("  ") + _name + " [" + to_string(_id) + "]";
 }
+
+gender Slav::checkGender()
+	{
+		if (_name[_name.length()-1]=='a')
+			return female;
+		else
+			return male;
+	} 
